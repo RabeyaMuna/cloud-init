@@ -14,7 +14,7 @@ jobs:
       matrix:
         env: [ruff, mypy, pylint, black, isort]
         lint-with:
-        - {tip-versions: false, os: ubuntu-20.04}
+        - {tip-versions: false, os: ubuntu-22.04}
         - {tip-versions: true, os: ubuntu-latest}
     name: Check ${{ matrix.lint-with.tip-versions && 'tip-' || '' }}${{ 
       matrix.env }}
