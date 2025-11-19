@@ -814,13 +814,10 @@ def joyent_metadata(mocker, m_serial):
             payloadstr = " {0}".format(
                 res.response_parts["payload"]  # pylint: disable=E1146,E1136
             )
-        return (
-            "V2 {length} {crc} {request_id} "
-            "{command}{payloadstr}\n".format(
-                payloadstr=payloadstr,
-                **res.response_parts  # pylint: disable=E1134
-            ).encode("ascii")
-        )
+        return "V2 {length} {crc} {request_id} {command}{payloadstr}\n".format(
+            payloadstr=payloadstr,
+            **res.response_parts,  # pylint: disable=E1134
+        ).encode("ascii")
 
     res.metasource_data = None
 
@@ -865,7 +862,6 @@ def joyent_serial_client(joyent_metadata):
 
 @pytest.mark.usefixtures("fake_filesystem")
 class TestJoyentMetadataClient:
-
     invalid = b"invalid command\n"
     failure = b"FAILURE\n"
     v2_ok = b"V2_OK\n"
@@ -876,9 +872,9 @@ class TestJoyentMetadataClient:
         )
 
     def assertStartsWith(self, haystack, prefix):
-        assert haystack.startswith(
-            prefix
-        ), "{0} does not start with '{1}'".format(repr(haystack), prefix)
+        assert haystack.startswith(prefix), (
+            "{0} does not start with '{1}'".format(repr(haystack), prefix)
+        )
 
     def assertNoMoreSideEffects(self, obj):
         with pytest.raises(StopIteration):
