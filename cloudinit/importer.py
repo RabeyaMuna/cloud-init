@@ -42,6 +42,8 @@ def match_case_insensitive_module_name(mod_name: str) -> Optional[str]:
     if not mod_name.startswith("DataSource"):
         mod_name = f"DataSource{mod_name}"
     modules = {}
+    import importlib.util
+
     spec = importlib.util.find_spec("cloudinit.sources")
     if spec and spec.submodule_search_locations:
         for dir in spec.submodule_search_locations:
@@ -67,6 +69,8 @@ def find_module(
         # Add base name to search paths. Filter out empty paths.
         full_path = ".".join(filter(None, [path, base_name]))
         lookup_paths.append(full_path)
+        import importlib.util
+
         if not importlib.util.find_spec(full_path):
             continue
         # Check that required_attrs are all present within the module.

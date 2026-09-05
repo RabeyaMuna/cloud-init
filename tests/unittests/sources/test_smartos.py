@@ -44,8 +44,7 @@ from cloudinit.util import write_file
 from tests.unittests.helpers import mock, skipIf
 
 DSMOS = "cloudinit.sources.DataSourceSmartOS"
-SDC_NICS = json.loads(
-    """
+SDC_NICS = json.loads("""
 [
     {
         "nic_tag": "external",
@@ -85,12 +84,10 @@ SDC_NICS = json.loads(
         ]
     }
 ]
-"""
-)
+""")
 
 
-SDC_NICS_ALT = json.loads(
-    """
+SDC_NICS_ALT = json.loads("""
 [
     {
         "interface": "net0",
@@ -126,11 +123,9 @@ SDC_NICS_ALT = json.loads(
         "mtu": 1500
     }
 ]
-"""
-)
+""")
 
-SDC_NICS_DHCP = json.loads(
-    """
+SDC_NICS_DHCP = json.loads("""
 [
     {
         "interface": "net0",
@@ -166,11 +161,9 @@ SDC_NICS_DHCP = json.loads(
         "mtu": 1500
     }
 ]
-"""
-)
+""")
 
-SDC_NICS_MIP = json.loads(
-    """
+SDC_NICS_MIP = json.loads("""
 [
     {
         "interface": "net0",
@@ -208,11 +201,9 @@ SDC_NICS_MIP = json.loads(
         "mtu": 1500
     }
 ]
-"""
-)
+""")
 
-SDC_NICS_MIP_IPV6 = json.loads(
-    """
+SDC_NICS_MIP_IPV6 = json.loads("""
 [
     {
         "interface": "net0",
@@ -249,11 +240,9 @@ SDC_NICS_MIP_IPV6 = json.loads(
         "mtu": 1500
     }
 ]
-"""
-)
+""")
 
-SDC_NICS_IPV4_IPV6 = json.loads(
-    """
+SDC_NICS_IPV4_IPV6 = json.loads("""
 [
     {
         "interface": "net0",
@@ -285,11 +274,9 @@ SDC_NICS_IPV4_IPV6 = json.loads(
         "mtu": 1500
     }
 ]
-"""
-)
+""")
 
-SDC_NICS_SINGLE_GATEWAY = json.loads(
-    """
+SDC_NICS_SINGLE_GATEWAY = json.loads("""
 [
   {
     "interface":"net0",
@@ -319,11 +306,9 @@ SDC_NICS_SINGLE_GATEWAY = json.loads(
     "mtu":1500
   }
 ]
-"""
-)
+""")
 
-SDC_NICS_ADDRCONF = json.loads(
-    """
+SDC_NICS_ADDRCONF = json.loads("""
 [
         {
           "gateway": "10.64.1.129",
@@ -344,8 +329,7 @@ SDC_NICS_ADDRCONF = json.loads(
           "vlan_id": 20
         }
 ]
-"""
-)
+""")
 
 MOCK_RETURNS = {
     "hostname": "test-host",
@@ -1427,7 +1411,7 @@ class TestNetworkConversion:
         assert expected == found
 
 
-@pytest.mark.allow_subp_for("mdata-get")
+@pytest.mark.allow_all_subp
 @pytest.fixture
 def mdata_proc():
     mdata_proc = multiprocessing.Process(target=start_mdata_loop)
@@ -1474,7 +1458,7 @@ class TestSerialConcurrency:
     This takes on the order of 2 to 3 minutes to run.
     """
 
-    @pytest.mark.allow_subp_for("mdata-get")
+    @pytest.mark.allow_all_subp
     def test_all_keys(self, mdata_proc):
         assert mdata_proc.pid is not None
         ds = DataSourceSmartOS
