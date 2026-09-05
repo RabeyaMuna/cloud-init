@@ -535,8 +535,6 @@ class IscDhclient(DhcpClient):
 class Dhcpcd(DhcpClient):
     client_name = "dhcpcd"
 
-    def __init__(self):
-        super().__init__()
 
     def dhcp_discovery(
         self,
