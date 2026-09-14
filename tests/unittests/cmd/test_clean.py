@@ -257,7 +257,6 @@ class TestClean:
             "cloudinit.cmd.clean.GEN_SSH_CONFIG_FILES",
             TEST_GEN_SSH_CONFIG_FILES,
         ):
-
             clean.remove_artifacts(
                 init_class,
                 remove_logs=False,

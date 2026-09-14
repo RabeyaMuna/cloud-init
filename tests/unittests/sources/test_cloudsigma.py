@@ -54,7 +54,6 @@ def ds(mocker, paths):
 
 
 class TestDataSourceCloudSigma:
-
     def test_get_hostname(self, ds):
         ds.get_data()
         assert "test_server" == ds.get_hostname().hostname

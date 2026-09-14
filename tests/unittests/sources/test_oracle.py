@@ -315,7 +315,6 @@ def oracle_ds(request, fixture_utils, paths, metadata_version, mocker):
 
 
 class TestDataSourceOracle:
-
     def test_check_instance_id(self, oracle_ds):
         oracle_ds.system_uuid = "someuuid"
         with mock.patch(
@@ -1242,7 +1241,6 @@ class TestNonIscsiRoot_GetDataBehaviour:
     def test_read_opc_metadata_called_with_ephemeral_dhcp(
         self, m_find_fallback_nic, m_ephemeral_network, oracle_ds
     ):
-
         in_context_manager = False
 
         def enter_context_manager():
@@ -1457,9 +1455,9 @@ class TestNetworkConfig:
         """
 
         if configure_secondary_nics is not None:
-            oracle_ds.ds_cfg["configure_secondary_nics"] = (
-                configure_secondary_nics
-            )
+            oracle_ds.ds_cfg[
+                "configure_secondary_nics"
+            ] = configure_secondary_nics
 
         oracle_ds._vnics_data = "DummyData"
         with mock.patch.object(

@@ -370,7 +370,6 @@ class TestOpenNebulaDataSource:
 
 @mock.patch(DS_PATH + ".net.get_interfaces_by_mac", mock.Mock(return_value={}))
 class TestOpenNebulaNetwork:
-
     system_nics = ("eth0", "ens3")
 
     def test_context_devname(self):

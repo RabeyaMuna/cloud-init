@@ -309,7 +309,6 @@ def _attach(pro_section: dict):
 
 
 def _auto_attach(pro_section: dict):
-
     # pylint: disable=import-error
     from uaclient.api.exceptions import AlreadyAttachedError, UserFacingError
     from uaclient.api.u.pro.attach.auto.full_auto_attach.v1 import (

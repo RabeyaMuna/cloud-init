@@ -840,7 +840,6 @@ class Renderer(renderer.Renderer):
 
     @staticmethod
     def _render_dns(network_state, existing_dns_path=None):
-
         found_nameservers = []
         found_dns_search = []
 

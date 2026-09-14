@@ -229,7 +229,6 @@ class TestPurgeDisk:
 @mock.patch("cloudinit.config.cc_disk_setup.device_type", return_value=None)
 @mock.patch("cloudinit.config.cc_disk_setup.subp.subp", return_value=("", ""))
 class TestMkfsCommandHandling:
-
     def test_with_cmd(
         self,
         subp,

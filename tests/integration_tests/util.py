@@ -220,7 +220,6 @@ def _verify_clean_boot(
     required_errors_found = set()
 
     for current_error in status["errors"]:
-
         # check for required errors
         for expected in require_errors:
             if expected in current_error:
@@ -237,7 +236,6 @@ def _verify_clean_boot(
 
     # check for unexpected warnings
     for current_warning in status["recoverable_errors"].get("WARNING", []):
-
         # check for required warnings
         for expected in require_warnings:
             if expected in current_warning:
@@ -256,7 +254,6 @@ def _verify_clean_boot(
     for current_deprecation in status["recoverable_errors"].get(
         "DEPRECATED", []
     ):
-
         # check for required deprecations
         for expected in require_deprecations:
             if expected in current_deprecation:

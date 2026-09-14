@@ -257,7 +257,6 @@ class DataSourceScaleway(sources.DataSource):
         return False
 
     def _get_data(self):
-
         # The DataSource uses EventType.BOOT so we are called more than once.
         # Try to crawl metadata on IPv4 first and set has_ipv4 to False if we
         # timeout so we do not try to crawl on IPv4 more than once.

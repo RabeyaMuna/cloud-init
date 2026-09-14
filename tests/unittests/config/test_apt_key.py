@@ -94,7 +94,6 @@ class TestAptKey:
         @mock.patch.object(os, "listdir", return_value=("/fake/dir/key.gpg",))
         @mock.patch.object(subp, "subp", return_value=(key, ""))
         def mocked_list(*a):
-
             keys = cc_apt_configure.apt_key("list", gpg, human_output)
             assert finger in keys
 

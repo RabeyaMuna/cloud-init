@@ -203,7 +203,6 @@ CFG_MINIMAL_LIST = {
 
 
 class TestSchema:
-
     @mark.parametrize(
         ("config", "error_msg"),
         (

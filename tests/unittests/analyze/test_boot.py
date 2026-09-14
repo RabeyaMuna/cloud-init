@@ -119,7 +119,6 @@ class TestAnalyzeBoot:
         "cloudinit.analyze.show.dist_check_timestamp", return_value=err_code
     )
     def test_boot_invalid_distro(self, m_dist_check_timestamp):
-
         path = os.path.dirname(os.path.abspath(__file__))
         log_path = path + "/boot-test.log"
         path += "/dummy.log"

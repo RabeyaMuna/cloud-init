@@ -15,7 +15,6 @@ CLOUDCIX_DMI_NAME = "CloudCIX"
 
 
 class DataSourceCloudCIX(sources.DataSource):
-
     dsname = "CloudCIX"
     # Setup read_url parameters through get_url_params()
     url_retries = 3

@@ -133,7 +133,6 @@ def test_all_stages_threaded(tmp_path):
     ), mock.patch.object(
         ci_socket.sys.stdin, "fileno"
     ):
-
         sync = ci_socket.SocketSync(
             "first", "second", "third", "fourth", "fifth"
         )

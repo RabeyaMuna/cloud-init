@@ -418,7 +418,6 @@ class TestCloudStackPasswordFetching:
 
 
 class TestDataSourceCloudStackLocal:
-
     @mock.patch(MOD_PATH + ".EphemeralIPNetwork", autospec=True)
     @mock.patch(MOD_PATH + ".net.find_fallback_nic")
     @mock.patch(MOD_PATH + ".get_vr_address", return_value="10.1.37.131")

@@ -21,7 +21,6 @@ EXOSCALE_DMI_NAME = "Exoscale"
 
 
 class DataSourceExoscale(sources.DataSource):
-
     dsname = "Exoscale"
 
     url_max_wait = 120

@@ -46,9 +46,9 @@ class Reaper:
         self.undead_ledger: Final[List[IntegrationInstance]] = []
 
         # Queue of newly reaped instances
-        self.reaped_instances: Final[queue.Queue[IntegrationInstance]] = (
-            queue.Queue()
-        )
+        self.reaped_instances: Final[
+            queue.Queue[IntegrationInstance]
+        ] = queue.Queue()
 
         # Thread object, handle used to re-join the thread
         self.reaper_thread: Optional[threading.Thread] = None

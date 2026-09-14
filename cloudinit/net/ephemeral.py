@@ -358,10 +358,10 @@ class EphemeralDHCPv4:
                 kwargs["prefix_or_mask"], kwargs["ip"]
             )
         if kwargs["static_routes"]:
-            kwargs["static_routes"] = (
-                self.distro.dhcp_client.parse_static_routes(
-                    kwargs["static_routes"]
-                )
+            kwargs[
+                "static_routes"
+            ] = self.distro.dhcp_client.parse_static_routes(
+                kwargs["static_routes"]
             )
         ephipv4 = EphemeralIPv4Network(
             self.distro,
@@ -451,16 +451,18 @@ class EphemeralIPNetwork:
         # first try to bring up ephemeral network for ipv4 (if enabled)
         # then try to bring up ephemeral network for ipv6 (if enabled)
         if self.ipv4:
-            ipv4_ephemeral_obtained, ipv4_exception = (
-                self._perform_ephemeral_network_setup(ip_version="ipv4")
-            )
+            (
+                ipv4_ephemeral_obtained,
+                ipv4_exception,
+            ) = self._perform_ephemeral_network_setup(ip_version="ipv4")
             ephemeral_obtained |= ipv4_ephemeral_obtained
             if ipv4_exception:
                 exceptions.append(ipv4_exception)
         if self.ipv6:
-            ipv6_ephemeral_obtained, ipv6_exception = (
-                self._perform_ephemeral_network_setup(ip_version="ipv6")
-            )
+            (
+                ipv6_ephemeral_obtained,
+                ipv6_exception,
+            ) = self._perform_ephemeral_network_setup(ip_version="ipv6")
             ephemeral_obtained |= ipv6_ephemeral_obtained
             if ipv6_exception:
                 exceptions.append(ipv6_exception)

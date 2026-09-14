@@ -182,7 +182,6 @@ def regist_json_meta_path(ds, metadata_address):
 
 
 class TestAliYunDatasource:
-
     def _test_get_data(self, ds):
         assert ds.metadata == DEFAULT_METADATA
         assert ds.userdata_raw == DEFAULT_USERDATA.encode("utf8")

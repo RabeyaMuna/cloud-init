@@ -25,7 +25,6 @@ LOG = logging.getLogger(__name__)
 
 @pytest.mark.usefixtures("fake_filesystem")
 class TestLocale:
-
     def test_set_locale_arch(self):
         locale = "en_GB.UTF-8"
         locale_configfile = "/etc/invalid-locale-path"

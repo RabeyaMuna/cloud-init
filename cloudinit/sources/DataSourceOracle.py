@@ -121,7 +121,6 @@ def _ensure_netfailover_safe(network_config: NetworkConfig) -> None:
 
 
 class DataSourceOracle(sources.DataSource):
-
     dsname = "Oracle"
     system_uuid = None
     network_config_sources: Tuple[sources.NetworkConfigSource, ...] = (
@@ -177,7 +176,6 @@ class DataSourceOracle(sources.DataSource):
         return _is_platform_viable()
 
     def _get_data(self):
-
         self.system_uuid = _read_system_uuid()
 
         connectivity_urls_data = (
@@ -569,7 +567,6 @@ def get_datasource_list(depends):
 
 
 if __name__ == "__main__":
-
     description = """
         Query Oracle Cloud metadata and emit a JSON object with two keys:
         `read_opc_metadata` and `_is_platform_viable`.  The values of each are

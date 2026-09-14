@@ -42,7 +42,6 @@ VALID_DMI_ASSET_TAGS += [
 
 
 class DataSourceOpenStack(openstack.SourceMixin, sources.DataSource):
-
     dsname = "OpenStack"
 
     _network_config = sources.UNSET  # Used to cache calculated network cfg v1
@@ -159,7 +158,6 @@ class DataSourceOpenStack(openstack.SourceMixin, sources.DataSource):
 
         if self.perform_dhcp_setup:  # Setup networking in init-local stage.
             try:
-
                 with EphemeralDHCPv4(
                     self.distro, self.distro.fallback_interface
                 ):

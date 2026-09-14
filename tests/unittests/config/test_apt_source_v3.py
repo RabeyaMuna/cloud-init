@@ -1358,7 +1358,6 @@ class TestDebconfSelections:
 
     @mock.patch("cloudinit.config.cc_apt_configure.subp.subp")
     def test_dpkg_reconfigure_does_reconfigure(self, m_subp, tmpdir):
-
         # due to the way the cleaners are called (via dictionary reference)
         # mocking clean_cloud_init directly does not work.  So we mock
         # the CONFIG_CLEANERS dictionary and assert our cleaner is called.

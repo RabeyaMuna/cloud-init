@@ -634,7 +634,6 @@ class Renderer(renderer.Renderer):
             network_state.iter_interfaces(),
             key=lambda k: (order[k["type"]], k["name"]),
         ):
-
             if iface.get("name") == "lo":
                 continue
             sections.extend(

@@ -2711,7 +2711,6 @@ USERCTL=no
     mock.Mock(return_value=False),
 )
 class TestOpenSuseSysConfigRendering:
-
     scripts_dir = "/etc/sysconfig/network"
     header = "# Created by cloud-init automatically, do not edit.\n#\n"
 

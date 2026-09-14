@@ -146,7 +146,6 @@ def _read_metadata_service():
 
 
 class TestOpenStackDataSource:
-
     VERSION = "latest"
 
     @pytest.fixture
@@ -557,7 +556,6 @@ class TestVendorDataLoading(test_helpers.TestCase):
 
 @test_helpers.mock.patch(MOCK_PATH + "util.is_x86")
 class TestDetectOpenStack:
-
     @pytest.fixture
     def fake_ds(self, paths) -> ds.DataSourceOpenStack:
         return ds.DataSourceOpenStack(

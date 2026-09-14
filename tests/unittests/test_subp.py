@@ -19,7 +19,6 @@ BOGUS_COMMAND = "this-is-not-expected-to-be-a-program-name"
 
 
 class TestPrependBaseCommands:
-
     def test_prepend_base_command_errors_on_neither_string_nor_list(self):
         """Raise an error for each command which is not a string or list."""
         orig_commands = ["ls", 1, {"not": "gonna work"}, ["basecmd", "list"]]

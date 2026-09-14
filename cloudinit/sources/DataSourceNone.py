@@ -8,7 +8,6 @@ from cloudinit import sources
 
 
 class DataSourceNone(sources.DataSource):
-
     dsname = "None"
 
     def __init__(self, sys_cfg, distro, paths, ud_proc=None):

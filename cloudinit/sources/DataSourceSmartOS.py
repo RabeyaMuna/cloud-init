@@ -162,7 +162,6 @@ LEGACY_USER_D = "/var/db"
 
 
 class DataSourceSmartOS(sources.DataSource):
-
     dsname = "Joyent"
 
     smartos_type = sources.UNSET
@@ -730,7 +729,6 @@ def jmc_client_factory(
     serial_timeout=SERIAL_TIMEOUT,
     uname_version=None,
 ):
-
     if smartos_type is None:
         smartos_type = get_smartos_environ(uname_version)
 

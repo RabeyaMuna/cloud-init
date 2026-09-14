@@ -182,7 +182,6 @@ class TestReceiveKeys:
         m_which.return_value = True
         with pytest.raises(ZeroDivisionError):
             with gpg.GPG() as gpg_context:
-
                 # run a gpg command so that we have "started" gpg
                 gpg_context.list_keys("")
                 1 / 0  # pylint: disable=pointless-statement

@@ -379,7 +379,6 @@ class TestDefaults:
             get_feature_flag_value(class_client, "APT_DEB822_SOURCE_LIST_FILE")
         )
         if feature_deb822:
-
             assert (
                 cc_apt_configure.UBUNTU_DEFAULT_APT_SOURCES_LIST.strip()
                 == class_client.read_from_file(ORIG_SOURCES_FILE)

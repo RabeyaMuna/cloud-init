@@ -1369,7 +1369,6 @@ def all_stages(parser):
 
 
 def sub_main(args, parser):
-
     try:
         # Subparsers.required = True
         # and each subparser sets action=(name, functor)

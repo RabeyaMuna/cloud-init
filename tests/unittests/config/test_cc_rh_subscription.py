@@ -23,7 +23,6 @@ NAME = "cc_rh_subscription"
 
 @mock.patch(SUB_MAN_CLI)
 class TestHappyPath:
-
     CONFIG = {
         "rh_subscription": {
             "username": "scooby@do.com",

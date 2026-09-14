@@ -12,7 +12,6 @@ from cloudinit import sources, url_helper, util
 
 
 class DataSourceBigstep(sources.DataSource):
-
     dsname = "Bigstep"
 
     def __init__(self, sys_cfg, distro, paths):

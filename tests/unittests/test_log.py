@@ -37,7 +37,6 @@ def log(ci_logs):
 
 
 class TestCloudInitLogger:
-
     def test_logger_uses_gmtime(self, log, ci_logs):
         """Test that log message have timestamp in UTC (gmtime)"""
 

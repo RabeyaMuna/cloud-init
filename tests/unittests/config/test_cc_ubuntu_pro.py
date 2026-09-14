@@ -683,7 +683,6 @@ class TestUbuntuProSchema:
 
 
 class TestHandle:
-
     cloud = get_cloud()
 
     @pytest.mark.parametrize(
@@ -1126,9 +1125,9 @@ class TestShouldAutoAttach:
         m_should_auto_attach.should_auto_attach.side_effect = (
             FakeUserFacingError("Some error")  # noqa: E501
         )
-        sys.modules["uaclient.api.u.pro.attach.auto.should_auto_attach.v1"] = (
-            m_should_auto_attach
-        )
+        sys.modules[
+            "uaclient.api.u.pro.attach.auto.should_auto_attach.v1"
+        ] = m_should_auto_attach
         assert not _should_auto_attach({})
         assert "Error during `should_auto_attach`: Some error" in caplog.text
         assert (
@@ -1150,9 +1149,9 @@ class TestShouldAutoAttach:
         self, ua_section, expected_result, caplog, fake_uaclient
     ):
         m_should_auto_attach = mock.Mock()
-        sys.modules["uaclient.api.u.pro.attach.auto.should_auto_attach.v1"] = (
-            m_should_auto_attach
-        )
+        sys.modules[
+            "uaclient.api.u.pro.attach.auto.should_auto_attach.v1"
+        ] = m_should_auto_attach
         should_auto_attach_value = object()
         m_should_auto_attach.should_auto_attach.return_value.should_auto_attach = (  # noqa: E501
             should_auto_attach_value
@@ -1167,7 +1166,6 @@ class TestShouldAutoAttach:
 
 
 class TestAutoAttach:
-
     ua_section: dict = {}
 
     def test_full_auto_attach_error(self, caplog, mocker, fake_uaclient):
@@ -1177,9 +1175,9 @@ class TestAutoAttach:
         m_full_auto_attach.full_auto_attach.side_effect = FakeUserFacingError(
             "Some error"
         )
-        sys.modules["uaclient.api.u.pro.attach.auto.full_auto_attach.v1"] = (
-            m_full_auto_attach
-        )
+        sys.modules[
+            "uaclient.api.u.pro.attach.auto.full_auto_attach.v1"
+        ] = m_full_auto_attach
         expected_msg = "Error during `full_auto_attach`: Some error"
         with pytest.raises(RuntimeError, match=re.escape(expected_msg)):
             _auto_attach(self.ua_section)
@@ -1188,9 +1186,9 @@ class TestAutoAttach:
     def test_happy_path(self, caplog, mocker, fake_uaclient):
         mocker.patch.dict("sys.modules")
         sys.modules["uaclient.config"] = mock.Mock()
-        sys.modules["uaclient.api.u.pro.attach.auto.full_auto_attach.v1"] = (
-            mock.Mock()
-        )
+        sys.modules[
+            "uaclient.api.u.pro.attach.auto.full_auto_attach.v1"
+        ] = mock.Mock()
         _auto_attach(self.ua_section)
 
 

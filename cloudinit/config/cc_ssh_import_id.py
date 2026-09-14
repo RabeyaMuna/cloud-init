@@ -32,7 +32,6 @@ LOG = logging.getLogger(__name__)
 
 
 def handle(name: str, cfg: Config, cloud: Cloud, args: list) -> None:
-
     if not is_key_in_nested_dict(cfg, "ssh_import_id"):
         LOG.debug(
             "Skipping module named ssh_import_id, no 'ssh_import_id'"
@@ -95,7 +94,6 @@ def handle(name: str, cfg: Config, cloud: Cloud, args: list) -> None:
 
 
 def import_ssh_ids(ids, user):
-
     if not (user and ids):
         LOG.debug("empty user(%s) or ids(%s). not importing", user, ids)
         return

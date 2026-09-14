@@ -17,7 +17,6 @@ LOG = logging.getLogger(__name__)
 
 
 class TestTimezone:
-
     def test_set_timezone_sles(self, fake_filesystem):
         cfg = {
             "timezone": "Tatooine/Bestine",

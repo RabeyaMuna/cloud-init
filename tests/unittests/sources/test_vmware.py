@@ -1489,7 +1489,6 @@ class TestDataSourceVMwareIMC:
 
 
 class TestDataSourceVMwareIMC_MarkerFiles:
-
     def test_false_when_markerid_none(self, tmpdir):
         """Return False when markerid provided is None."""
         assert not guestcust_util.check_marker_exists(

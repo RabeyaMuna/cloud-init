@@ -346,7 +346,6 @@ class TestFTP:
             if CURRENT_RELEASE > FOCAL:
                 assert client.execute("apt install -yq mkcert").ok
             else:
-
                 # install golang
                 assert client.execute("apt install -yq golang").ok
 

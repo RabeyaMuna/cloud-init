@@ -737,7 +737,6 @@ def distro_redhat():
 
 @pytest.mark.usefixtures("fake_filesystem")
 class TestNetCfgDistroRedhat:
-
     def ifcfg_path(self, ifname):
         return "/etc/sysconfig/network-scripts/ifcfg-%s" % ifname
 

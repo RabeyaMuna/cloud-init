@@ -32,7 +32,6 @@ except FileNotFoundError:
 
 
 class TestInstallChefOmnibus:
-
     @responses.activate
     @mock.patch("cloudinit.config.cc_chef.OMNIBUS_URL", cc_chef.OMNIBUS_URL)
     def test_install_chef_from_omnibus_runs_chef_url_content(self):
@@ -120,7 +119,6 @@ class TestInstallChefOmnibus:
 
 @pytest.mark.usefixtures("fake_filesystem")
 class TestChef:
-
     def test_no_config(self):
         """No chef directories are created on when no chef config provided"""
         cfg = {}
@@ -267,7 +265,6 @@ class TestChef:
 
     @skipIf(not CLIENT_TEMPL, "templates/chef_client.rb.tmpl is not available")
     def test_template_deletes(self):
-
         util.write_file(
             "/etc/cloud/templates/chef_client.rb.tmpl", CLIENT_TEMPL
         )

@@ -24,7 +24,6 @@ MD_WAIT_RETRY = 5
 
 
 class DataSourceNWCS(sources.DataSource):
-
     dsname = "NWCS"
 
     def __init__(self, sys_cfg, distro, paths):

@@ -25,7 +25,6 @@ LIVE_INSTALLER_SNAPS = ("subiquity", "ubuntu-desktop-installer")
 
 
 def handle(name: str, cfg: Config, cloud: Cloud, args: list) -> None:
-
     util.wait_for_snap_seeded(cloud)
     snap_list, _ = subp.subp(["snap", "list"])
     installer_present = None

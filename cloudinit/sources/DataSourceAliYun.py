@@ -19,7 +19,6 @@ ALIYUN_PRODUCT = "Alibaba Cloud ECS"
 
 
 class DataSourceAliYun(sources.DataSource):
-
     dsname = "AliYun"
     metadata_urls = ["http://100.100.100.200"]
 

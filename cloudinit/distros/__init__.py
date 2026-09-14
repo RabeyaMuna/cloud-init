@@ -248,7 +248,6 @@ class Distro(persistence.CloudInitPickleMixin, metaclass=abc.ABCMeta):
         # supported by the distro
         total_failed: Set[str] = set()
         for manager in self.package_managers:
-
             manager_packages = packages_by_manager.get(
                 manager.__class__, set()
             )

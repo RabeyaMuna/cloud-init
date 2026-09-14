@@ -60,7 +60,6 @@ class GoogleMetadataFetcher:
 
 
 class DataSourceGCE(sources.DataSource):
-
     dsname = "GCE"
     perform_dhcp_setup = False
     default_update_events = {
@@ -248,7 +247,6 @@ def _parse_public_keys(public_keys_data, default_user=None):
 
 
 def read_md(address=None, url_params=None, platform_check=True):
-
     if address is None:
         address = MD_V1_URL
 

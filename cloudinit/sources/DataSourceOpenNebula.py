@@ -41,7 +41,6 @@ EXCLUDED_VARS = (
 
 
 class DataSourceOpenNebula(sources.DataSource):
-
     dsname = "OpenNebula"
 
     def __init__(self, sys_cfg, distro, paths):

@@ -43,7 +43,6 @@ MERGED_PART_SCHEMA_ERROR_PREFIX = "# Cloud-config part ignored SCHEMA_ERROR: "
 
 
 class CloudConfigPartHandler(handlers.Handler):
-
     # The content prefixes this handler understands.
     prefixes = [CLOUD_PREFIX, JSONP_PREFIX]
 

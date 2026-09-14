@@ -172,7 +172,6 @@ class AnsiblePullDistro(AnsiblePull):
 
 
 def handle(name: str, cfg: Config, cloud: Cloud, args: list) -> None:
-
     ansible_cfg: dict = cfg.get("ansible", {})
     ansible_user = ansible_cfg.get("run_user")
     install_method = ansible_cfg.get("install_method")

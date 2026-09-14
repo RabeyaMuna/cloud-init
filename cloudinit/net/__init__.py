@@ -708,7 +708,6 @@ def _get_current_rename_info(check_downable=True):
 def _rename_interfaces(
     renames, strict_present=True, strict_busy=True, current_info=None
 ):
-
     if not len(renames):
         LOG.debug("no interfaces to rename")
         return
@@ -1003,7 +1002,6 @@ def get_interfaces_by_mac_on_linux() -> dict:
         # TODO: move this format to openstack
         ib_mac = get_ib_interface_hwaddr(name, True)
         if ib_mac:
-
             # If an Ethernet mac address happens to collide with a few bits in
             # an IB GUID, prefer the ethernet address.
             #

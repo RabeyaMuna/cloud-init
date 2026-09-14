@@ -218,14 +218,12 @@ class TestDataSourceScaleway:
 
     @responses.activate
     def test_set_metadata_url_ipv4_ok(self):
-
         self.datasource._set_metadata_url([self.base_urls[0]])
 
         assert self.base_urls[0] in self.datasource.metadata_url
 
     @responses.activate
     def test_set_metadata_url_ipv6_ok(self):
-
         self.datasource._set_metadata_url([self.base_urls[1]])
 
         assert self.base_urls[1] in self.datasource.metadata_url

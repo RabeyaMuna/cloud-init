@@ -47,7 +47,6 @@ class TestPhoton:
 
     @mock.patch("cloudinit.net.generate_fallback_config")
     def test_fallback_netcfg(self, m_fallback_cfg, caplog):
-
         key = "disable_fallback_netcfg"
         # Don't use fallback if no setting given
         caplog.clear()

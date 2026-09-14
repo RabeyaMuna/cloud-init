@@ -18,7 +18,6 @@ LOG = logging.getLogger(__name__)
 
 
 class BootHookPartHandler(handlers.Handler):
-
     # The content prefixes this handler understands.
     prefixes = ["#cloud-boothook"]
 

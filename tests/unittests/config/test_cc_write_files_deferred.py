@@ -20,7 +20,6 @@ LOG = logging.getLogger(__name__)
 
 @pytest.mark.usefixtures("fake_filesystem")
 class TestWriteFilesDeferred:
-
     USER = "root"
 
     @mock.patch("cloudinit.config.cc_write_files.util.chownbyname")

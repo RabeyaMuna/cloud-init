@@ -297,7 +297,6 @@ def find_device_node(
 
     raw_device_used = False
     for d in enumerate_disk(device):
-
         if d["fstype"] == replace_fs and label_match is False:
             # We found a device where we want to replace the FS
             return ("/dev/%s" % d["name"], False)
@@ -309,7 +308,6 @@ def find_device_node(
             return ("/dev/%s" % d["name"], True)
 
         if d["type"] in valid_targets:
-
             if d["type"] != "disk" or d["fstype"]:
                 raw_device_used = True
 
@@ -1299,7 +1297,7 @@ def mkfs(fs_cfg):
                 device = f"{device}p"
             device = "%s%s" % (device, partition)
             if not Path(device).is_block_device():
-                LOG.warning("Path %s does not exist or is not a block device")
+                LOG.warning("Path %s does not exist or is not a block device", device)
                 return
             LOG.debug(
                 "Manual request of partition %s for %s", partition, device

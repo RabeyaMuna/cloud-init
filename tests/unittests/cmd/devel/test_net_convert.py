@@ -101,7 +101,6 @@ def mock_setup_logging():
 
 
 class TestNetConvert:
-
     missing_required_args = itertools.combinations(
         required_args, len(required_args) - 1
     )

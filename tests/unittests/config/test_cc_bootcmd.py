@@ -36,7 +36,6 @@ class FakeExtendedTempFile:
 
 @pytest.mark.usefixtures("fake_filesystem")
 class TestBootcmd:
-
     _etmpfile_path = (
         "cloudinit.config.cc_bootcmd.temp_utils.ExtendedTemporaryFile"
     )

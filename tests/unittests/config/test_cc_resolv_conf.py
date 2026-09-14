@@ -106,7 +106,6 @@ class TestResolvConf:
 
 
 class TestGenerateResolvConf:
-
     dist = MockDistro()
     tmpl_fn = cloud_init_project_dir("templates/resolv.conf.tmpl")
 

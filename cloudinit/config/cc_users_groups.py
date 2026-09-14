@@ -41,7 +41,6 @@ def handle(name: str, cfg: Config, cloud: Cloud, args: list) -> None:
         cloud.distro.create_group(name, members)
 
     for user, config in users.items():
-
         no_home = [key for key in NO_HOME if config.get(key)]
         need_home = [key for key in NEED_HOME if config.get(key)]
         if no_home and need_home:

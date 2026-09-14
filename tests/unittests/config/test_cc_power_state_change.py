@@ -35,7 +35,6 @@ class TestLoadPowerState(t_help.TestCase):
         self.assertIsNone(cmd)
 
     def test_invalid_mode(self):
-
         cfg = {"power_state": {"mode": "gibberish"}}
         self.assertRaises(TypeError, psc.load_power_state, cfg, self.dist)
 

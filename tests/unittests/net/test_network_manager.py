@@ -23,7 +23,6 @@ class TestNetworkManagerRenderNetworkState:
             return network_state.parse_net_config_data(config)
 
     def test_bond_dns_baseline(self, tmpdir):
-
         config = textwrap.dedent(
             """\
             version: 1
@@ -212,7 +211,6 @@ class TestNetworkManagerRenderNetworkState:
             assert_equal_dict(expected_config, rendered_content)
 
     def test_bond_dns_redacted_with_method_disabled(self, tmpdir):
-
         config = textwrap.dedent(
             """\
             version: 1
@@ -403,7 +401,6 @@ class TestNetworkManagerRenderNetworkState:
             assert_equal_dict(expected_config, rendered_content)
 
     def test_bond_balance_tlb_baseline(self, tmpdir):
-
         config = textwrap.dedent(
             """\
             version: 1
@@ -547,7 +544,6 @@ class TestNetworkManagerRenderNetworkState:
             assert_equal_dict(expected_config, rendered_content)
 
     def test_bond_balance_rr_baseline(self, tmpdir):
-
         config = textwrap.dedent(
             """\
             version: 1
@@ -681,7 +677,6 @@ class TestNetworkManagerRenderNetworkState:
             assert_equal_dict(expected_config, rendered_content)
 
     def test_bond_active_backup_baseline(self, tmpdir):
-
         config = textwrap.dedent(
             """\
             version: 1

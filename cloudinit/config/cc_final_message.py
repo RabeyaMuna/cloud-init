@@ -36,7 +36,6 @@ FINAL_MESSAGE_DEF = (
 
 
 def handle(name: str, cfg: Config, cloud: Cloud, args: list) -> None:
-
     msg_in = ""
     if args:
         msg_in = str(args[0])

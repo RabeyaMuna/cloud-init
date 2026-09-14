@@ -40,7 +40,6 @@ class NotJinjaError(Exception):
 
 
 class JinjaTemplatePartHandler(handlers.Handler):
-
     prefixes = ["## template: jinja"]
 
     def __init__(self, paths: Paths, **_kwargs):

@@ -91,7 +91,6 @@ def isc_dh_cli(tmp_path):
 
 @pytest.mark.usefixtures("dhclient_exists")
 class TestParseDHCPLeasesFile:
-
     def test_parse_empty_lease_file_errors(self, isc_dh_cli):
         """get_newest_lease errors when file content is empty."""
         ensure_file(isc_dh_cli.lease_file)

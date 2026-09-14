@@ -633,7 +633,6 @@ def _run_func_with_delay(
 ) -> Any:
     """Execute func with optional delay"""
     if delay:
-
         # event returns True iff the flag is set to true: indicating that
         # another thread has already completed successfully, no need to try
         # again - exit early
@@ -682,7 +681,6 @@ def dual_stack(
 
         # handle returned requests in order of completion
         for future in as_completed(futures, timeout=timeout):
-
             returned_address = futures[future]
             return_exception = future.exception()
             if return_exception:
@@ -691,7 +689,6 @@ def dual_stack(
             else:
                 return_result = future.result()
                 if return_result:
-
                     # communicate to other threads that they do not need to
                     # try: this thread has already succeeded
                     is_done.set()

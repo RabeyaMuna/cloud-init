@@ -25,7 +25,6 @@ MD_WAIT_RETRY = 2
 
 
 class DataSourceUpCloud(sources.DataSource):
-
     dsname = "UpCloud"
 
     # We'll perform DHCP setup only in init-local, see DataSourceUpCloudLocal

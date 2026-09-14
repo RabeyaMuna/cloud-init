@@ -28,7 +28,6 @@ from tests.unittests.helpers import assert_count_equal, mock
 
 
 class DataSourceTestSubclassNet(DataSource):
-
     dsname = "MyTestSubclass"
     url_max_wait = 55
 
@@ -71,7 +70,6 @@ class InvalidDataSourceTestSubclassNet(DataSource):
 
 
 class TestDataSource:
-
     @pytest.fixture(autouse=True)
     def fixtures(self, paths):
         self.sys_cfg = {"datasource": {"_undef": {"key1": False}}}

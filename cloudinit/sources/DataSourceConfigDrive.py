@@ -31,7 +31,6 @@ OPTICAL_DEVICES = tuple(
 
 
 class DataSourceConfigDrive(openstack.SourceMixin, sources.DataSource):
-
     dsname = "ConfigDrive"
 
     supported_update_events = {

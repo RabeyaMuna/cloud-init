@@ -17,7 +17,6 @@ from tests.unittests import helpers as test_helpers
 
 
 class TestTemplates:
-
     jinja_utf8 = b"It\xe2\x80\x99s not ascii, {{name}}\n"
     jinja_utf8_rbob = b"It\xe2\x80\x99s not ascii, bob\n".decode("utf-8")
 

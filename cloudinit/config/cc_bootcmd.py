@@ -31,7 +31,6 @@ meta: MetaSchema = {
 
 
 def handle(name: str, cfg: Config, cloud: Cloud, args: list) -> None:
-
     if "bootcmd" not in cfg:
         LOG.debug(
             "Skipping module named %s, no 'bootcmd' key in configuration", name

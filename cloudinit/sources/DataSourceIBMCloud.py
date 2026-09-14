@@ -120,7 +120,6 @@ PROVISIONING = (
 
 
 class DataSourceIBMCloud(sources.DataSource):
-
     dsname = "IBMCloud"
     system_uuid = None
 

@@ -19,7 +19,6 @@ ZYPP_CONF = "etc/zypp/zypp.conf"
 
 @pytest.mark.usefixtures("fake_filesystem")
 class TestConfig:
-
     def test_bad_repo_config(self):
         """Config has no baseurl, no file should be written"""
         cfg = {

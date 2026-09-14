@@ -197,7 +197,6 @@ class HotplugRetrySettings(NamedTuple):
 
 
 class DataSource(CloudInitPickleMixin, metaclass=abc.ABCMeta):
-
     dsmode = DSMODE_NETWORK
     default_locale = "en_US.UTF-8"
 

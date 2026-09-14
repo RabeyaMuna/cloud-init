@@ -15,7 +15,6 @@ from cloudinit.settings import PER_ALWAYS
 
 
 class ShellScriptPartHandler(handlers.Handler):
-
     prefixes = ["#!"]
 
     def __init__(self, paths, **_kwargs):

@@ -95,7 +95,6 @@ def set_redhat_keyfile_perms(keyfile: str) -> None:
 
 
 def handle(name: str, cfg: Config, cloud: Cloud, args: list) -> None:
-
     # remove the static keys from the pristine image
     if cfg.get("ssh_deletekeys", True):
         key_pth = os.path.join("/etc/ssh/", "ssh_host_*key*")
@@ -255,7 +254,6 @@ def handle(name: str, cfg: Config, cloud: Cloud, args: list) -> None:
 
 
 def apply_credentials(keys, user, disable_root, disable_root_opts):
-
     keys = set(keys)
     if user:
         ssh_util.setup_user_keys(keys, user)

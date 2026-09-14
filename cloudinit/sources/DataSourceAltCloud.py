@@ -70,7 +70,6 @@ def read_user_data_callback(mount_dir):
 
 
 class DataSourceAltCloud(sources.DataSource):
-
     dsname = "AltCloud"
 
     def __init__(self, sys_cfg, distro, paths):

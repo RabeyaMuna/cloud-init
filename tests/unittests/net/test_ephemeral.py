@@ -221,7 +221,6 @@ class TestEphemeralIPNetwork:
         has_connectivity,
         caplog,
     ):
-
         def wait_for_url_side_effect(
             urls,
             headers_cb,
