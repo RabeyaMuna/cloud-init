@@ -98,8 +98,7 @@ class TestParseDHCPLeasesFile(CiTestCase):
         within.
         """
         lease_file = self.tmp_path("leases")
-        content = dedent(
-            """
+        content = dedent("""
             lease {
               interface "wlp3s0";
               fixed-address 192.168.2.74;
@@ -116,8 +115,7 @@ class TestParseDHCPLeasesFile(CiTestCase):
               option subnet-mask 255.255.255.0;
               option routers 192.168.2.1;
             }
-        """
-        )
+        """)
         expected = [
             {
                 "interface": "wlp3s0",
@@ -148,8 +146,7 @@ class TestDHCPRFC3442(CiTestCase):
         rfc3442-classless-static-routes.
         """
         lease_file = self.tmp_path("leases")
-        content = dedent(
-            """
+        content = dedent("""
             lease {
               interface "wlp3s0";
               fixed-address 192.168.2.74;
@@ -159,8 +156,7 @@ class TestDHCPRFC3442(CiTestCase):
               renew 4 2017/07/27 18:02:30;
               expire 5 2017/07/28 07:08:15;
             }
-        """
-        )
+        """)
         expected = [
             {
                 "interface": "wlp3s0",
@@ -183,8 +179,7 @@ class TestDHCPRFC3442(CiTestCase):
         for Centos lease format.
         """
         lease_file = self.tmp_path("leases")
-        content = dedent(
-            """
+        content = dedent("""
             lease {
               interface "wlp3s0";
               fixed-address 192.168.2.74;
@@ -194,8 +189,7 @@ class TestDHCPRFC3442(CiTestCase):
               renew 4 2017/07/27 18:02:30;
               expire 5 2017/07/28 07:08:15;
             }
-        """
-        )
+        """)
         expected = [
             {
                 "interface": "wlp3s0",
@@ -447,8 +441,8 @@ class TestDHCPDiscoveryClean(CiTestCase):
             self.logs.getvalue(),
         )
         self.assertIn(
-           "DHCP client not found: dhcpcd",
-           self.logs.getvalue(),
+            "DHCP client not found: dhcpcd",
+            self.logs.getvalue(),
         )
 
     @mock.patch("cloudinit.net.dhcp.find_fallback_nic", return_value=None)
@@ -492,16 +486,14 @@ class TestDHCPDiscoveryClean(CiTestCase):
         """
         m_subp.return_value = ("", "")
 
-        lease_content = dedent(
-            """
+        lease_content = dedent("""
             lease {
               interface "eth9";
               fixed-address 192.168.2.74;
               option subnet-mask 255.255.255.0;
               option routers 192.168.2.1;
             }
-        """
-        )
+        """)
 
         with mock.patch(
             "cloudinit.util.load_file", return_value=lease_content
@@ -577,16 +569,14 @@ class TestDHCPDiscoveryClean(CiTestCase):
         It also returns the parsed dhcp.leases file.
         """
         m_subp.return_value = ("", "")
-        lease_content = dedent(
-            """
+        lease_content = dedent("""
             lease {
               interface "eth9";
               fixed-address 192.168.2.74;
               option subnet-mask 255.255.255.0;
               option routers 192.168.2.1;
             }
-        """
-        )
+        """)
         my_pid = 1
         m_getppid.return_value = 1  # Indicate that dhclient has daemonized
 
@@ -659,16 +649,14 @@ class TestDHCPDiscoveryClean(CiTestCase):
 
         It also returns the parsed dhcp.leases file.
         """
-        lease_content = dedent(
-            """
+        lease_content = dedent("""
             lease {
               interface "ib0";
               fixed-address 192.168.2.74;
               option subnet-mask 255.255.255.0;
               option routers 192.168.2.1;
             }
-        """
-        )
+        """)
         my_pid = 1
         with mock.patch(
             "cloudinit.util.load_file", side_effect=["1", lease_content]
@@ -733,16 +721,14 @@ class TestDHCPDiscoveryClean(CiTestCase):
         dhclient_out = "FAKE DHCLIENT OUT"
         m_subp.return_value = (dhclient_out, dhclient_err)
         tmpdir = self.tmp_dir()
-        lease_content = dedent(
-            """
+        lease_content = dedent("""
                 lease {
                   interface "eth9";
                   fixed-address 192.168.2.74;
                   option subnet-mask 255.255.255.0;
                   option routers 192.168.2.1;
                 }
-            """
-        )
+            """)
         lease_file = os.path.join(tmpdir, "dhcp.leases")
         write_file(lease_file, lease_content)
         pid_file = os.path.join(tmpdir, "dhclient.pid")
@@ -760,8 +746,7 @@ class TestDHCPDiscoveryClean(CiTestCase):
 
 
 class TestSystemdParseLeases(CiTestCase):
-    lxd_lease = dedent(
-        """\
+    lxd_lease = dedent("""\
     # This is private data. Do not parse.
     ADDRESS=10.75.205.242
     NETMASK=255.255.255.0
@@ -776,8 +761,7 @@ class TestSystemdParseLeases(CiTestCase):
     DOMAINNAME=lxd
     HOSTNAME=a1
     CLIENTID=ffe617693400020000ab110c65a6a0866931c2
-    """
-    )
+    """)
 
     lxd_parsed = {
         "ADDRESS": "10.75.205.242",
@@ -795,8 +779,7 @@ class TestSystemdParseLeases(CiTestCase):
         "CLIENTID": "ffe617693400020000ab110c65a6a0866931c2",
     }
 
-    azure_lease = dedent(
-        """\
+    azure_lease = dedent("""\
     # This is private data. Do not parse.
     ADDRESS=10.132.0.5
     NETMASK=255.255.255.255
@@ -815,8 +798,7 @@ class TestSystemdParseLeases(CiTestCase):
     ROUTES=10.132.0.1/32,0.0.0.0 0.0.0.0/0,10.132.0.1
     CLIENTID=ff405663a200020000ab11332859494d7a8b4c
     OPTION_245=624c3620
-    """
-    )
+    """)
 
     azure_parsed = {
         "ADDRESS": "10.132.0.5",
