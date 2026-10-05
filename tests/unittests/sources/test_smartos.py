@@ -31,11 +31,10 @@ import serial
 from cloudinit.atomic_helper import b64e
 from cloudinit.event import EventScope, EventType
 from cloudinit.sources import DataSourceSmartOS
-from cloudinit.sources.DataSourceSmartOS import SERIAL_DEVICE, SMARTOS_ENV_KVM
 from cloudinit.sources.DataSourceSmartOS import (
+    SERIAL_DEVICE,
+    SMARTOS_ENV_KVM,
     convert_smartos_network_data as convert_net,
-)
-from cloudinit.sources.DataSourceSmartOS import (
     get_smartos_environ,
     identify_file,
 )
@@ -1427,7 +1426,6 @@ class TestNetworkConversion:
         assert expected == found
 
 
-@pytest.mark.allow_subp_for("mdata-get")
 @pytest.fixture
 def mdata_proc():
     mdata_proc = multiprocessing.Process(target=start_mdata_loop)

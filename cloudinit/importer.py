@@ -12,7 +12,7 @@ import importlib
 from types import ModuleType
 from typing import Optional, Sequence
 
-from cloudinit import util
+import cloudinit.util as util
 
 
 def import_module(module_name: str) -> ModuleType:
