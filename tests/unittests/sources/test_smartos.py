@@ -31,17 +31,18 @@ import serial
 from cloudinit.atomic_helper import b64e
 from cloudinit.event import EventScope, EventType
 from cloudinit.sources import DataSourceSmartOS
-from cloudinit.sources.DataSourceSmartOS import SERIAL_DEVICE, SMARTOS_ENV_KVM
 from cloudinit.sources.DataSourceSmartOS import (
-    convert_smartos_network_data as convert_net,
-)
-from cloudinit.sources.DataSourceSmartOS import (
+    SERIAL_DEVICE,
+    SMARTOS_ENV_KVM,
     get_smartos_environ,
     identify_file,
 )
+from cloudinit.sources.DataSourceSmartOS import (
+    convert_smartos_network_data as convert_net,
+)
 from cloudinit.subp import ProcessExecutionError, subp, which
 from cloudinit.util import write_file
-from tests.unittests.helpers import mock, skipIf
+from tests.unittests.helpers import mock
 
 DSMOS = "cloudinit.sources.DataSourceSmartOS"
 SDC_NICS = json.loads(
@@ -815,10 +816,9 @@ def joyent_metadata(mocker, m_serial):
                 res.response_parts["payload"]  # pylint: disable=E1146,E1136
             )
         return (
-            "V2 {length} {crc} {request_id} "
-            "{command}{payloadstr}\n".format(
+            "V2 {length} {crc} {request_id} " "{command}{payloadstr}\n".format(
                 payloadstr=payloadstr,
-                **res.response_parts  # pylint: disable=E1134
+                **res.response_parts,  # pylint: disable=E1134
             ).encode("ascii")
         )
 
@@ -865,7 +865,6 @@ def joyent_serial_client(joyent_metadata):
 
 @pytest.mark.usefixtures("fake_filesystem")
 class TestJoyentMetadataClient:
-
     invalid = b"invalid command\n"
     failure = b"FAILURE\n"
     v2_ok = b"V2_OK\n"
