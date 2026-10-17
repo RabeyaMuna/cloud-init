@@ -194,6 +194,7 @@ class IscDhclient(DhcpClient):
 
     def __init__(self):
         super().__init__()
+        # Dhcpcd-specific initialization can be added here if needed
         self.lease_file = "/run/dhclient.lease"
 
     @staticmethod
