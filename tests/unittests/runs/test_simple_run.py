@@ -12,9 +12,8 @@ from cloudinit.sources import NetworkConfigSource
 from tests.unittests.helpers import replicate_test_root
 
 
-@pytest.mark.usefixtures("fake_filesystem_hook")
 @pytest.fixture(autouse=True)
-def replicate_root(tmp_path):
+def replicate_root(tmp_path, fake_filesystem_hook):
     replicate_test_root("simple_ubuntu", str(tmp_path))
 
 
@@ -47,9 +46,8 @@ def cfg(mocker, tmp_path):
     return _cfg
 
 
-@pytest.mark.usefixtures("fake_filesystem")
 class TestSimpleRun:
-    def test_none_ds_populates_var_lib_cloud(self):
+    def test_none_ds_populates_var_lib_cloud(self, fake_filesystem):
         """Init and run_section default behavior creates appropriate dirs."""
         # Now start verifying whats created
         netcfg = {
@@ -83,7 +81,9 @@ class TestSimpleRun:
             "/var/lib/cloud/instance/network-config.json"
         )
 
-    def test_none_ds_runs_modules_which_do_not_define_distros(self, caplog):
+    def test_none_ds_runs_modules_which_do_not_define_distros(
+        self, caplog, fake_filesystem
+    ):
         """Any modules which do not define a distros attribute are run."""
         initer = stages.Init()
         initer.read_cfg()
@@ -111,7 +111,7 @@ class TestSimpleRun:
         )
 
     def test_none_ds_skips_modules_which_define_unmatched_distros(
-        self, caplog
+        self, caplog, fake_filesystem
     ):
         """Skip modules which define distros which don't match the current."""
         initer = stages.Init()
@@ -136,7 +136,9 @@ class TestSimpleRun:
         )
         assert "spacewalk" not in which_ran
 
-    def test_none_ds_runs_modules_which_distros_all(self, caplog):
+    def test_none_ds_runs_modules_which_distros_all(
+        self, caplog, fake_filesystem
+    ):
         """Skip modules which define distros attribute as supporting 'all'.
 
         This is done in the module with the declaration:
@@ -164,7 +166,9 @@ class TestSimpleRun:
             " distro 'ubuntu'" not in caplog.text
         )
 
-    def test_none_ds_forces_run_via_unverified_modules(self, caplog, cfg):
+    def test_none_ds_forces_run_via_unverified_modules(
+        self, caplog, cfg, fake_filesystem
+    ):
         """run_section forced skipped modules by using unverified_modules."""
 
         # re-write cloud.cfg with unverified_modules override
@@ -193,7 +197,7 @@ class TestSimpleRun:
         assert "spacewalk" in which_ran
         assert "running unverified_modules: 'spacewalk'" in caplog.text
 
-    def test_none_ds_run_with_no_config_modules(self, cfg):
+    def test_none_ds_run_with_no_config_modules(self, cfg, fake_filesystem):
         """run_section will report no modules run when none are configured."""
 
         # re-write cloud.cfg with unverified_modules override
