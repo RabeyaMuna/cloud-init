@@ -318,9 +318,7 @@ try:
     assert jsonschema  # avoid pyflakes error F401: import unused
     _jsonschema_version = tuple(
         int(part)
-        for part in importlib.metadata.metadata("jsonschema")
-        .get("Version", "")
-        .split(".")
+        for part in importlib.metadata.version("jsonschema").split(".")
     )
     _missing_jsonschema_dep = False
 except ImportError:

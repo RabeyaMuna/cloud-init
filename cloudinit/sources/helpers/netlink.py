@@ -12,6 +12,8 @@ from collections import namedtuple
 from cloudinit import util
 
 LOG = logging.getLogger(__name__)
+AF_NETLINK = getattr(socket, "AF_NETLINK", 16)
+NETLINK_ROUTE = getattr(socket, "NETLINK_ROUTE", 0)
 
 # http://man7.org/linux/man-pages/man7/netlink.7.html
 RTMGRP_LINK = 1
@@ -65,7 +67,7 @@ def create_bound_netlink_socket():
     """
     try:
         netlink_socket = socket.socket(
-            socket.AF_NETLINK, socket.SOCK_RAW, socket.NETLINK_ROUTE
+            AF_NETLINK, socket.SOCK_RAW, NETLINK_ROUTE
         )
         netlink_socket.bind((os.getpid(), RTMGRP_LINK))
         netlink_socket.setblocking(0)

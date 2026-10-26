@@ -257,7 +257,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
                 config.disable_file, config.paths, False
             )
         assert code == expected_bootstatus, failure_msg
-        if isinstance(expected_reason, str):
+        if isinstance(expected_reason, str):  # type: ignore[unreachable]
             assert reason == expected_reason
         else:
             assert reason == expected_reason(config)
