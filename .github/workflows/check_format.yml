@@ -14,7 +14,7 @@ jobs:
       matrix:
         env: [ruff, mypy, pylint, black, isort]
     name: Check ${{ matrix.env }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - name: 'Checkout #1'
       uses: actions/checkout@v4
@@ -34,9 +34,9 @@ jobs:
 
     - name: Test
       env:
-          # matrix env: not to be confused w/environment variables or testenv
         TOXENV: ${{ matrix.env }}
       run: tox
+
   schema-format:
     strategy:
       fail-fast: false
@@ -99,3 +99,4 @@ jobs:
     - name: Run ShellCheck
       run: |
         shellcheck ./tools/ds-identify
+        
