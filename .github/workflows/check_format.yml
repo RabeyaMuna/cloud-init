@@ -24,6 +24,9 @@ jobs:
         git fetch --unshallow
         git remote add upstream https://git.launchpad.net/cloud-init
 
+    - name: Create pip constraints
+      run: echo "markupsafe<3.0" > /tmp/constraints.txt
+
     - name: Dependencies
       run: |
         sudo DEBIAN_FRONTEND=noninteractive apt-get -qy update
@@ -35,6 +38,7 @@ jobs:
     - name: Test
       env:
         TOXENV: ${{ matrix.env }}
+        PIP_CONSTRAINT: /tmp/constraints.txt
       run: tox
 
   schema-format:
@@ -99,4 +103,3 @@ jobs:
     - name: Run ShellCheck
       run: |
         shellcheck ./tools/ds-identify
-        
