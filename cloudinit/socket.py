@@ -1,5 +1,6 @@
 # This file is part of cloud-init. See LICENSE file for license information.
 """A module for common socket helpers."""
+
 import logging
 import os
 import socket
@@ -11,6 +12,7 @@ from cloudinit import performance
 from cloudinit.settings import DEFAULT_RUN_DIR
 
 LOG = logging.getLogger(__name__)
+SOCK_CLOEXEC = getattr(socket, "SOCK_CLOEXEC", 0)
 
 
 def sd_notify(message: str):
@@ -33,7 +35,7 @@ def sd_notify(message: str):
         raise OSError("Unsupported socket type")
 
     with socket.socket(
-        socket.AF_UNIX, socket.SOCK_DGRAM | socket.SOCK_CLOEXEC
+        socket.AF_UNIX, socket.SOCK_DGRAM | SOCK_CLOEXEC
     ) as sock:
         LOG.info("Sending sd_notify(%s)", str(message))
         sock.connect(socket_path)
@@ -61,7 +63,7 @@ class SocketSync:
         self.experienced_any_error = False
         self.sockets = {
             name: socket.socket(
-                socket.AF_UNIX, socket.SOCK_STREAM | socket.SOCK_CLOEXEC
+                socket.AF_UNIX, socket.SOCK_STREAM | SOCK_CLOEXEC
             )
             for name in names
         }

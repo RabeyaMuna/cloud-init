@@ -9,6 +9,7 @@
 # This file is part of cloud-init. See LICENSE file for license information.
 
 import importlib
+from importlib import util as importlib_util
 from types import ModuleType
 from typing import Optional, Sequence
 
@@ -42,7 +43,7 @@ def match_case_insensitive_module_name(mod_name: str) -> Optional[str]:
     if not mod_name.startswith("DataSource"):
         mod_name = f"DataSource{mod_name}"
     modules = {}
-    spec = importlib.util.find_spec("cloudinit.sources")
+    spec = importlib_util.find_spec("cloudinit.sources")
     if spec and spec.submodule_search_locations:
         for dir in spec.submodule_search_locations:
             modules.update(util.get_modules_from_dir(dir))
@@ -67,7 +68,7 @@ def find_module(
         # Add base name to search paths. Filter out empty paths.
         full_path = ".".join(filter(None, [path, base_name]))
         lookup_paths.append(full_path)
-        if not importlib.util.find_spec(full_path):
+        if not importlib_util.find_spec(full_path):
             continue
         # Check that required_attrs are all present within the module.
         if _count_attrs(full_path, required_attrs) == len(required_attrs):

@@ -322,7 +322,9 @@ class TestDataSourceLXD:
         assert NETWORK_V1 == lxd_ds._network_config
         # Any user-data and vendor-data are saved as raw
         assert LXD_V1_METADATA["user-data"] == lxd_ds.userdata_raw
-        assert LXD_V1_METADATA["vendor-data"] == lxd_ds.vendordata_raw
+        assert (  # type: ignore[unreachable]
+            LXD_V1_METADATA["vendor-data"] == lxd_ds.vendordata_raw
+        )
 
     def test_network_config_when_unset(self, lxd_ds):
         """network_config is correctly computed when _network_config and

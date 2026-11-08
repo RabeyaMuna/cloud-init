@@ -214,6 +214,7 @@ lint.select = [
     "Q",   # flake8-quotes
 ]
 lint.ignore = [
+    "ISC004",
     "D100", # docstring: public module
     "D101", # docstring: public class required
     "D102", # docstring: public method required
