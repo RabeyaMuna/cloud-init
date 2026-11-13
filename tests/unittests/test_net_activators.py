@@ -325,12 +325,16 @@ class TestActivatorsBringDown:
 
 
 class TestNetworkManagerActivatorBringUp:
+    @staticmethod
+    def fake_isfile_no_nmconn(filename):
+        return False if filename.endswith(".nmconnection") else True
+
     @patch("cloudinit.subp.subp", return_value=("", ""))
     @patch(
         "cloudinit.net.network_manager.available_nm_ifcfg_rh",
         return_value=True,
     )
-    @patch("os.path.isfile")
+    @patch("os.path.isfile", side_effect=fake_isfile_no_nmconn)
     @patch("os.path.exists", return_value=True)
     def test_bring_up_interface_no_nm_conn(
         self, m_exists, m_isfile, m_plugin, m_subp
@@ -340,11 +344,6 @@ class TestNetworkManagerActivatorBringUp:
         present and ifcfg interface config files are also present. In this
         case, we should use ifcfg files.
         """
-
-        def fake_isfile_no_nmconn(filename):
-            return False if filename.endswith(".nmconnection") else True
-
-        m_isfile.side_effect = fake_isfile_no_nmconn
 
         expected_call_list = [
             (
@@ -391,7 +390,7 @@ class TestNetworkManagerActivatorBringUp:
         "cloudinit.net.network_manager.available_nm_ifcfg_rh",
         return_value=False,
     )
-    @patch("os.path.isfile")
+    @patch("os.path.isfile", side_effect=fake_isfile_no_nmconn)
     @patch("os.path.exists", return_value=True)
     def test_bring_up_interface_no_plugin_no_nm_conn(
         self, m_exists, m_isfile, m_plugin, m_subp
@@ -402,10 +401,6 @@ class TestNetworkManagerActivatorBringUp:
         interface bring up should fail.
         """
 
-        def fake_isfile_no_nmconn(filename):
-            return False if filename.endswith(".nmconnection") else True
-
-        m_isfile.side_effect = fake_isfile_no_nmconn
         assert not NetworkManagerActivator.bring_up_interface("eth0")
 
     @patch("cloudinit.subp.subp", return_value=("", ""))
