@@ -50,14 +50,14 @@ class TestPhoneHome:
     @pytest.mark.parametrize(
         "tries, expected_retries",
         [
-            (-1, -2),
-            (0, -1),
-            (1, 0),
-            (2, 1),
-            ("2", 1),
-            ("two", 9),
-            (None, 9),
-            ({}, 9),
+            pytest.param(-1, -2, id="neg1"),
+            pytest.param(0, -1, id="zero"),
+            pytest.param(1, 0, id="one"),
+            pytest.param(2, 1, id="two_int"),
+            pytest.param("2", 1, id="two_str"),
+            pytest.param("two", 9, id="two_word"),
+            pytest.param(None, 9, id="none"),
+            pytest.param({}, 9, id="empty_dict"),
         ],
     )
     def test_tries(self, m_readurl, tries, expected_retries, caplog):

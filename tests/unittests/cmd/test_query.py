@@ -253,10 +253,25 @@ class TestQuery:
     @pytest.mark.parametrize(
         "ud_src,ud_expected,vd_src,vd_expected",
         (
-            ("hi mom", "hi mom", "hi pops", "hi pops"),
-            ("ud".encode("utf-8"), "ud", "vd".encode("utf-8"), "vd"),
-            (_gzip_data(b"ud"), "ud", _gzip_data(b"vd"), "vd"),
-            (_gzip_data("ud".encode("utf-8")), "ud", _gzip_data(b"vd"), "vd"),
+            pytest.param(
+                "hi mom", "hi mom", "hi pops", "hi pops",
+                id="plain_text",
+            ),
+            pytest.param(
+                "ud".encode("utf-8"), "ud",
+                "vd".encode("utf-8"), "vd",
+                id="encoded_text",
+            ),
+            pytest.param(
+                _gzip_data(b"ud"), "ud",
+                _gzip_data(b"vd"), "vd",
+                id="gzip_bytes",
+            ),
+            pytest.param(
+                _gzip_data("ud".encode("utf-8")), "ud",
+                _gzip_data(b"vd"), "vd",
+                id="gzip_encoded",
+            ),
         ),
     )
     def test_handle_args_root_processes_user_data(

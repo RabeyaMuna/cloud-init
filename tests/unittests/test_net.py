@@ -4961,8 +4961,11 @@ class TestRenderersSelect:
             ("eni", True, True, False, False, False),
             # +netplan -ifupdown -sys -nm -networkd selects netplan
             ("netplan", True, False, False, False, False),
-            # +netplan -ifupdown -sys -nm -networkd selects netplan
-            ("netplan", True, False, False, False, False),
+            # +netplan -ifupdown -sys -nm -networkd selects netplan (2nd)
+            pytest.param(
+                "netplan", True, False, False, False, False,
+                id="netplan_2nd",
+            ),
             # -netplan -ifupdown +sys -nm -networkd selects sysconfig
             ("sysconfig", False, False, True, False, False),
             # -netplan -ifupdown +sys +nm -networkd selects sysconfig

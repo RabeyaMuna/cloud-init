@@ -1710,7 +1710,7 @@ class TestNetworkSchema:
                 SchemaType.NETWORK_CONFIG_V1,
                 does_not_raise(),
                 "",
-                id="config_key_required",
+                id="empty_config_valid",
             ),
             pytest.param(
                 {

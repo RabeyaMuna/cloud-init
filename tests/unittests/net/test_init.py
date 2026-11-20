@@ -1725,11 +1725,25 @@ class TestIsIpAddress:
     @pytest.mark.parametrize(
         "ip_address_side_effect,expected_return",
         (
-            (ValueError, False),
-            (lambda _: ipaddress.IPv4Address("192.168.0.1"), True),
-            (lambda _: ipaddress.IPv4Address("192.168.0.1/24"), False),
-            (lambda _: ipaddress.IPv6Address("2001:db8::"), True),
-            (lambda _: ipaddress.IPv6Address("2001:db8::/48"), False),
+            pytest.param(
+                ValueError, False, id="value_error",
+            ),
+            pytest.param(
+                lambda _: ipaddress.IPv4Address("192.168.0.1"),
+                True, id="ipv4_valid",
+            ),
+            pytest.param(
+                lambda _: ipaddress.IPv4Address("192.168.0.1/24"),
+                False, id="ipv4_with_prefix",
+            ),
+            pytest.param(
+                lambda _: ipaddress.IPv6Address("2001:db8::"),
+                True, id="ipv6_valid",
+            ),
+            pytest.param(
+                lambda _: ipaddress.IPv6Address("2001:db8::/48"),
+                False, id="ipv6_with_prefix",
+            ),
         ),
     )
     def test_is_ip_address(self, ip_address_side_effect, expected_return):

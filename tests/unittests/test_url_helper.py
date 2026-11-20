@@ -283,7 +283,15 @@ class TestReadFileOrUrl:
 class TestReadFileOrUrlParameters:
     @mock.patch(M_PATH + "readurl")
     @pytest.mark.parametrize(
-        "timeout", [1, 1.2, "1", (1, None), (1, 1), (None, None)]
+        "timeout",
+        [
+            pytest.param(1, id="timeout_int"),
+            pytest.param(1.2, id="timeout_float"),
+            pytest.param("1", id="timeout_str"),
+            pytest.param((1, None), id="timeout_tuple_none"),
+            pytest.param((1, 1), id="timeout_tuple_both"),
+            pytest.param((None, None), id="timeout_tuple_none_none"),
+        ],
     )
     def test_read_file_or_url_passes_params_to_readurl(
         self, m_readurl, timeout
@@ -312,15 +320,15 @@ class TestReadFileOrUrlParameters:
     @pytest.mark.parametrize(
         "readurl_timeout,request_timeout",
         [
-            (-1, 0),
-            ("-1", 0),
-            (None, None),
-            (1, 1.0),
-            (1.2, 1.2),
-            ("1", 1.0),
-            ((1, None), (1, None)),
-            ((1, 1), (1, 1)),
-            ((None, None), (None, None)),
+            pytest.param(-1, 0, id="neg1_int"),
+            pytest.param("-1", 0, id="neg1_str"),
+            pytest.param(None, None, id="none"),
+            pytest.param(1, 1.0, id="one_int"),
+            pytest.param(1.2, 1.2, id="one_point_two"),
+            pytest.param("1", 1.0, id="one_str"),
+            pytest.param((1, None), (1, None), id="tuple_one_none"),
+            pytest.param((1, 1), (1, 1), id="tuple_one_one"),
+            pytest.param((None, None), (None, None), id="tuple_none_none"),
         ],
     )
     def test_readurl_timeout(self, readurl_timeout, request_timeout):
