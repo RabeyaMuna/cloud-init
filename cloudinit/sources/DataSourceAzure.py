@@ -50,11 +50,11 @@ from cloudinit.sources.helpers.azure import (
 from cloudinit.url_helper import UrlError
 
 try:
-    import crypt  # pylint: disable=W4901
+    import hashlib
 
-    blowfish_hash: Any = functools.partial(
-        crypt.crypt, salt=f"$6${util.rand_str(strlen=16)}"
-    )
+    blowfish_hash: Any = lambda x: hashlib.sha512(
+        f"$6${util.rand_str(strlen=16)}".encode() + x.encode()
+    ).hexdigest()
 except (ImportError, AttributeError):
     try:
         import passlib.hash

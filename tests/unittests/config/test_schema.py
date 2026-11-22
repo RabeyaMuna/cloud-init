@@ -1400,7 +1400,7 @@ class TestMain:
                 "      - type: dhcp\n",
                 "  Invalid network-config {network_file}",
                 pytest.raises(SystemExit),
-                id="netv1_schema_error_on_nic_name_length",
+                id="netv1_schema_error_on_nic_name_length_2",
             ),
         ),
     )
@@ -1492,6 +1492,7 @@ def _get_meta_doc_examples(file_glob="cloud-config*.txt"):
     return (
         str(f)
         for f in examples_dir.glob(file_glob)
+    )
         if not re.match(exclusion_match, f.name)
     )
 
@@ -2169,7 +2170,7 @@ apt_reboot_if_required: Deprecated in version 22.2. Use\
                     """  # noqa: E501
                 ),
                 pytest.raises(SystemExit),
-                id="root_no_annotate_exception_with_unique_errors",
+                id="root_no_annotate_exception_with_unique_errors_1",
             ),
         ],
     )
@@ -2252,7 +2253,7 @@ apt_reboot_if_required: Deprecated in version 22.2. Use\
                     """  # noqa: E501
                 ),
                 pytest.raises(SystemExit),
-                id="root_no_annotate_exception_with_unique_errors",
+                id="root_no_annotate_exception_with_unique_errors_2",
             ),
         ],
     )

@@ -291,9 +291,9 @@ class TestHandleUsersGroups:
             (
                 mock.ANY,
                 logging.WARNING,
-                "Ignoring ssh_redirect_user: True for me2. No"
+                ("Ignoring ssh_redirect_user: True for me2. No"
                 " default_user defined. Perhaps missing"
-                " cloud configuration users:  [default, ..].",
+                " cloud configuration users:  [default, ..]."),
             )
         ] == caplog.record_tuples
 

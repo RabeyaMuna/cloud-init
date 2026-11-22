@@ -1418,8 +1418,8 @@ class Distro(persistence.CloudInitPickleMixin, metaclass=abc.ABCMeta):
                 "su",
                 "-",
                 user,
-                "-c",
-                directory + "env PATH=$PATH " + " ".join(command),
+                "-c", 
+                (directory + "env PATH=$PATH " + " ".join(command)),
             ],
             **kwargs,
         )

@@ -1597,9 +1597,9 @@ class TestIsDeb822SourcesFormat:
                 "#Something neither deb/deb-src nor deb822\n",
                 False,
                 [
-                    "apt.sources_list value does not match either deb822"
+                    ("apt.sources_list value does not match either deb822"
                     " source keys or deb/deb-src list keys. Assuming APT"
-                    " deb/deb-src list format."
+                    " deb/deb-src list format.")
                 ],
                 id="neither_deb822_keys_nor_deb_deb_src_warn_and_not_deb822",
             ),

@@ -26,22 +26,22 @@ from tests.unittests.util import get_cloud
 try:
     import pip as _pip  # noqa: F401
 
-    HAS_PIP = True
+    HAS_PIP: bool = True
 except ImportError:
-    HAS_PIP = False
+    HAS_PIP: bool = False
 
 M_PATH = "cloudinit.config.cc_ansible."
 distro_version = dedent(
-    """ansible 2.10.8
+    ("""ansible 2.10.8
   config file = None
   configured module search path = ['/home/holmanb/.ansible/plugins/modules', \
   '/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/lib/python3/dist-packages/ansible
   executable location = /usr/bin/ansible
-  python version = 3.10.4 (main, Jun 29 2022, 12:14:53) [GCC 11.2.0]"""
+  python version = 3.10.4 (main, Jun 29 2022, 12:14:53) [GCC 11.2.0]""")
 )
 pip_version = dedent(
-    """ansible-pull [core 2.13.2]
+    ("""ansible-pull [core 2.13.2]
   config file = None
   configured module search path = ['/root/.ansible/plugins/modules', \
   '/usr/share/ansible/plugins/modules']
@@ -53,7 +53,7 @@ pip_version = dedent(
   ansible/__main__.py
   python version = 3.8.10 (default, Jun 22 2022, 20:18:18) [GCC 9.4.0]
   jinja version = 3.1.2
-  libyaml = True """
+  libyaml = True """)
 )
 
 CFG_CTRL = {
@@ -124,8 +124,8 @@ CFG_FULL_PULL_DICT: Dict[str, Any] = {
             "scp_extra_args": "-l",
             "sftp_extra_args": "-f",
             "checkout": "tree",
-            "module_path": "~/.ansible/plugins/modules:"
-            "/usr/share/ansible/plugins/modules",
+            "module_path": ("~/.ansible/plugins/modules:"
+            "/usr/share/ansible/plugins/modules"),
             "timeout": "10",
             "vault_id": "me",
             "connection": "smart",
@@ -631,8 +631,8 @@ class TestAnsible:
                     "--scp-extra-args=-l",
                     "--sftp-extra-args=-f",
                     "--checkout=tree",
-                    "--module-path=~/.ansible/plugins/modules"
-                    ":/usr/share/ansible/plugins/modules",
+                    "--module-path=(~/.ansible/plugins/modules"
+                    ":/usr/share/ansible/plugins/modules)",
                     "--timeout=10",
                     "--vault-id=me",
                     "--connection=smart",

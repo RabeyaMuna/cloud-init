@@ -599,10 +599,10 @@ dns = none
             (
                 "etc/udev/rules.d/85-persistent-net-cloud-init.rules",
                 "".join(
-                    [
+                    (
                         'SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ',
                         'ATTR{address}=="fa:16:3e:ed:9a:59", NAME="eth0"\n',
-                    ]
+                    )
                 ),
             ),
         ],
@@ -648,10 +648,10 @@ dns = none
             (
                 "etc/udev/rules.d/70-persistent-net.rules",
                 "".join(
-                    [
+                    (
                         'SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ',
                         'ATTR{address}=="fa:16:3e:ed:9a:59", NAME="eth0"\n',
-                    ]
+                    )
                 ),
             ),
         ],
@@ -4909,7 +4909,7 @@ class TestNetworkdRoundTrip:
         self.compare_dicts(actual, expected)
 
     @pytest.mark.xfail(
-        reason="DNS and Domains getting rendered on multiple lines"
+        reason=("DNS and Domains getting rendered on multiple lines")
     )
     @mock.patch("cloudinit.net.util.chownbyname", return_value=True)
     def test_v1_dns(self, m_chown):

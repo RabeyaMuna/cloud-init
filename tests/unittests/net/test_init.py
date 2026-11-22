@@ -722,7 +722,7 @@ class TestGetInterfaceMAC:
         expected = [("eth2", mac2, None, None)]
         assert expected == net.get_interfaces()
 
-    @mock.patch("cloudinit.net.is_netfailover")
+    @mock.patch("cloudinit.net.is_netfailover", autospec=True)
     def test_get_interfaces_by_mac_skips_netfailvoer(self, m_netfail):
         """Ignore interfaces if netfailover primary or standby."""
         mac = "aa:bb:cc:aa:bb:cc"  # netfailover devs share the same mac

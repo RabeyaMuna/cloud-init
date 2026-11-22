@@ -24,25 +24,25 @@ from cloudinit.url_helper import (
     read_file_or_url,
     readurl,
     wait_for_url,
-)
+)  # type: ignore
 
 try:
     import oauthlib
 
     assert oauthlib  # avoid pyflakes error F401: import unused
-    _missing_oauthlib_dep = False
+    _missing_oauthlib_dep: bool = False
 except ImportError:
-    _missing_oauthlib_dep = True
+    _missing_oauthlib_dep: bool = True
 
 
-M_PATH = "cloudinit.url_helper."
+M_PATH: str = "cloudinit.url_helper."
 
 
-def exception_cb(exception):
+def exception_cb(exception: Exception) -> bool:
     return True
 
 
-def headers_cb(url):
+def headers_cb(url: str) -> dict[str, str]:
     return {"cb_key": "cb_value"}
 
 

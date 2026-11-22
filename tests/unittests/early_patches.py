@@ -1,8 +1,8 @@
 import functools
-from typing import Callable
+from typing import Callable, List
 
 old_lru_cache = functools.lru_cache
-cached_functions = []
+cached_functions: List[Callable] = []
 
 
 def wrapped_lru_cache(*args, **kwargs):

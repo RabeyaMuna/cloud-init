@@ -100,11 +100,13 @@ class TestQuery:
                 '{"v1": {"key-2": "value-2"}}',
                 "v1.absent_leaf",
                 "instance-data 'v1' has no 'absent_leaf'\n",
+                id="v1_absent_leaf",
             ),
             (
                 '{"v1": {"key-2": "value-2"}}',
                 "absent_key",
                 "Undefined instance-data key 'absent_key'\n",
+                id="absent_key",
             ),
         ),
     )
@@ -175,9 +177,9 @@ class TestQuery:
     @pytest.mark.parametrize(
         "exception",
         [
-            (OSError(errno.EACCES, "Not allowed"),),
-            (OSError(errno.ENOENT, "Not allowed"),),
-            (IOError,),
+            (OSError(errno.EACCES, "Not allowed"), id="EACCES"),
+            (OSError(errno.ENOENT, "Not allowed"), id="ENOENT"),
+            (IOError, id="IOError"),
         ],
     )
     def test_handle_args_error_when_no_read_permission_init_cfg(
@@ -253,10 +255,10 @@ class TestQuery:
     @pytest.mark.parametrize(
         "ud_src,ud_expected,vd_src,vd_expected",
         (
-            ("hi mom", "hi mom", "hi pops", "hi pops"),
-            ("ud".encode("utf-8"), "ud", "vd".encode("utf-8"), "vd"),
-            (_gzip_data(b"ud"), "ud", _gzip_data(b"vd"), "vd"),
-            (_gzip_data("ud".encode("utf-8")), "ud", _gzip_data(b"vd"), "vd"),
+            ("hi mom", "hi mom", "hi pops", "hi pops", id="string_values"),
+            ("ud".encode("utf-8"), "ud", "vd".encode("utf-8"), "vd", id="encoded_values"),
+            (_gzip_data(b"ud"), "ud", _gzip_data(b"vd"), "vd", id="gzip_bytes"),
+            (_gzip_data("ud".encode("utf-8")), "ud", _gzip_data(b"vd"), "vd", id="mixed_gzip"),
         ),
     )
     def test_handle_args_root_processes_user_data(
@@ -353,8 +355,8 @@ class TestQuery:
                 m_getuid.return_value = 0
                 assert 0 == query.handle_args("anyname", args)
         expected = (
-            '{\n "combined_cloud_config": null,\n "my-var": "it worked",\n '
-            '"userdata": "ud",\n "vendordata": "vd"\n}\n'
+            ('{\n "combined_cloud_config": null,\n "my-var": "it worked",\n '
+             '"userdata": "ud",\n "vendordata": "vd"\n}\n')
         )
         out, _err = capsys.readouterr()
         assert expected == out
@@ -377,10 +379,10 @@ class TestQuery:
             m_getuid.return_value = 100
             assert 0 == query.handle_args("anyname", args)
         expected = (
-            '{\n "combined_cloud_config": "<redacted for non-root user> file:'
-            '/run/cloud-init/combined-cloud-config.json",\n "my-var":'
-            ' "it worked",\n "userdata": "<%s> file:ud",\n'
-            ' "vendordata": "<%s> file:vd"\n}\n'
+            ('{\n "combined_cloud_config": "<redacted for non-root user> file:'
+             '/run/cloud-init/combined-cloud-config.json",\n "my-var":'
+             ' "it worked",\n "userdata": "<%s> file:ud",\n'
+             ' "vendordata": "<%s> file:vd"\n}\n')
             % (REDACT_SENSITIVE_VALUE, REDACT_SENSITIVE_VALUE)
         )
         out, _err = capsys.readouterr()
@@ -419,7 +421,7 @@ class TestQuery:
                 '{"v1": {"something-hyphenated": {"no.underscores":"x",'
                 ' "no-alias": "y"}}, "my-var": "it worked"}',
                 "v1.something_hyphenated",
-                '{\n "no-alias": "y",\n "no.underscores": "x"\n}\n',
+                ('{\n "no-alias": "y",\n "no.underscores": "x"\n}\n'),
             ),
         ),
     )
@@ -451,8 +453,8 @@ class TestQuery:
         """Any standardized vars under v# are promoted as top-level aliases."""
         instance_data = tmpdir.join("instance-data")
         instance_data.write(
-            '{"v1": {"v1_1": "val1.1"}, "v2": {"v2_2": "val2.2"},'
-            ' "top": "gun"}'
+            ('{"v1": {"v1_1": "val1.1"}, "v2": {"v2_2": "val2.2"},'
+             ' "top": "gun"}')
         )
         expected = dedent(
             """\
@@ -499,8 +501,8 @@ class TestQuery:
             ' "top": "gun"}'
         )
         expected = (
-            "combined_cloud_config\ntop\nuserdata\nv1\nv1_1\nv2\nv2_2\n"
-            "vendordata\n"
+            ("combined_cloud_config\ntop\nuserdata\nv1\nv1_1\nv2\nv2_2\n"
+             "vendordata\n")
         )
         args = self.Args(
             debug=False,
@@ -524,8 +526,8 @@ class TestQuery:
         """Sort all nested keys of varname object when --list-keys provided."""
         instance_data = tmpdir.join("instance-data")
         instance_data.write(
-            '{"v1": {"v1_1": "val1.1", "v1_2": "val1.2"}, "v2":'
-            ' {"v2_2": "val2.2"}, "top": "gun"}'
+            ('{"v1": {"v1_1": "val1.1", "v1_2": "val1.2"}, "v2":'
+             ' {"v2_2": "val2.2"}, "top": "gun"}')
         )
         expected = "v1_1\nv1_2\n"
         args = self.Args(
@@ -550,8 +552,8 @@ class TestQuery:
         """Raise an error when --list-keys and varname specify a non-list."""
         instance_data = tmpdir.join("instance-data")
         instance_data.write(
-            '{"v1": {"v1_1": "val1.1", "v1_2": "val1.2"}, "v2": '
-            '{"v2_2": "val2.2"}, "top": "gun"}'
+            ('{"v1": {"v1_1": "val1.1", "v1_2": "val1.2"}, "v2": '
+             '{"v2_2": "val2.2"}, "top": "gun"}')
         )
         expected_error = "--list-keys provided but 'top' is not a dict"
         args = self.Args(

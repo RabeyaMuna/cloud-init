@@ -15,7 +15,7 @@ from tests.integration_tests.util import (
     network_wait_logged,
     override_kernel_command_line,
     verify_clean_boot,
-    verify_clean_log,
+    verify_clean_log
 )
 
 VENDOR_DATA = """\
@@ -76,22 +76,22 @@ def setup_nocloud(instance: LXDInstance):
     if "/var/lib/cloud/seed/nocloud-net" in lxd_image_metadata.stdout:
         return
     subp(
-        ["lxc", "config", "template", "create", instance.name, "emptycfg.tpl"],
+        ["lxc", "config", "template", "create", instance.name, "emptycfg.tpl"]
     )
     subp(
         ["lxc", "config", "template", "edit", instance.name, "emptycfg.tpl"],
-        data="#cloud-config\n{}\n",
+        data="#cloud-config\n{}\n"
     )
     subp(
-        ["lxc", "config", "template", "create", instance.name, "netcfg.tpl"],
+        ["lxc", "config", "template", "create", instance.name, "netcfg.tpl"]
     )
     subp(
         ["lxc", "config", "template", "edit", instance.name, "netcfg.tpl"],
-        data=NETWORK_CONFIG,
+        data=NETWORK_CONFIG
     )
     subp(
         ["lxc", "config", "metadata", "edit", instance.name],
-        data=f"{lxd_image_metadata.stdout}{LXD_METADATA_NOCLOUD_SEED}",
+        data=f"{lxd_image_metadata.stdout}{LXD_METADATA_NOCLOUD_SEED}"
     )
 
 
@@ -99,7 +99,7 @@ def setup_nocloud(instance: LXDInstance):
 @pytest.mark.lxd_use_exec
 @pytest.mark.skipif(
     PLATFORM != "lxd_container",
-    reason="Requires NoCloud with custom setup",
+    reason="Requires NoCloud with custom setup"
 )
 def test_nocloud_seedfrom_vendordata(client: IntegrationInstance):
     """Integration test for #570.
@@ -122,7 +122,7 @@ def test_nocloud_seedfrom_vendordata(client: IntegrationInstance):
 
     client.write_to_file(
         "{}/vendor-data".format(seed_dir),
-        VENDOR_DATA,
+        VENDOR_DATA
     )
     client.execute("cloud-init clean --logs")
     client.restart()
@@ -150,7 +150,7 @@ def setup_nocloud_local_serial(instance: LXDInstance):
             "set",
             instance.name,
             "raw.qemu=-smbios "
-            f"type=1,serial=ds=nocloud;s=file://{SMBIOS_SEED_DIR};h=myhost",
+            f"type=1,serial=ds=nocloud;s=file://{SMBIOS_SEED_DIR};h=myhost"
         ]
     )
 
@@ -163,7 +163,7 @@ def setup_nocloud_network_serial(instance: LXDInstance):
             "set",
             instance.name,
             "raw.qemu=-smbios "
-            "type=1,serial=ds=nocloud-net;s=http://0.0.0.0/;h=myhost",
+            "type=1,serial=ds=nocloud-net;s=http://0.0.0.0/;h=myhost"
         ]
     )
 
@@ -211,7 +211,7 @@ class TestSmbios:
                 """
                 ExecStart=/usr/bin/env python3 -m http.server --bind 0.0.0.0 80
                 """
-            ),
+            )
         )
         assert client.execute(
             "chmod 644 /lib/systemd/system/local-server.service"
@@ -219,7 +219,7 @@ class TestSmbios:
         assert client.execute("systemctl enable local-server.service").ok
         client.write_to_file(
             "/etc/cloud/cloud.cfg.d/91_do_not_use_lxd.cfg",
-            "datasource_list: [ NoCloud, None ]\n",
+            "datasource_list: [ NoCloud, None ]\n"
         )
         assert client.execute(f"mkdir -p {SMBIOS_SEED_DIR}").ok
         client.write_to_file(f"{SMBIOS_SEED_DIR}/user-data", SMBIOS_USERDATA)

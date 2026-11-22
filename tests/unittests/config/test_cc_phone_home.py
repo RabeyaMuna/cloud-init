@@ -59,6 +59,7 @@ class TestPhoneHome:
             (None, 9),
             ({}, 9),
         ],
+        ids=["case1", "case2", "case3", "case4", "case5", "case6", "case7", "case8"]
     )
     def test_tries(self, m_readurl, tries, expected_retries, caplog):
         cfg = {"phone_home": {"url": "dontcare"}}

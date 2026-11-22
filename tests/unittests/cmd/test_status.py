@@ -184,7 +184,7 @@ class TestStatus:
                 status.EnabledStatus.DISABLED_BY_MARKER_FILE,
                 "expected disabled cloud-init",
                 lambda config: f"Cloud-init disabled by {config.disable_file}",
-                id="true_on_disable_file",
+                id="true_on_disable_file_1",
             ),
             # Not disabled when using systemd and enabled via command line.
             pytest.param(
@@ -348,8 +348,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
                     "v1": {
                         "stage": None,  # No current stage running
                         "datasource": (
-                            "DataSourceNoCloud "
-                            "[seed=/var/.../seed/nocloud-net]"
+                            ("DataSourceNoCloud "
+                            "[seed=/var/.../seed/nocloud-net]")
                             "[dsmode=net]"
                         ),
                         "blah": {"finished": 123.456},
@@ -375,9 +375,9 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
                     "v1": {
                         "stage": None,
                         "datasource": (
-                            "DataSourceNoCloud "
-                            "[seed=/var/.../seed/nocloud-net]"
-                            "[dsmode=net]"
+                            ("DataSourceNoCloud ")
+                            ("[seed=/var/.../seed/nocloud-net]"
+                            "[dsmode=net]")
                         ),
                         "init": {"start": 124.567, "finished": 125.678},
                         "init-local": {"start": 123.45, "finished": 123.46},
@@ -429,8 +429,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
                     "v1": {
                         "stage": None,
                         "datasource": (
-                            "DataSourceNoCloud "
-                            "[seed=/var/.../seed/nocloud-net]"
+                            ("DataSourceNoCloud "
+                            "[seed=/var/.../seed/nocloud-net]")
                             "[dsmode=net]"
                         ),
                         "init": {
@@ -563,8 +563,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
                     "v1": {
                         "stage": None,
                         "datasource": (
-                            "DataSourceNoCloud "
-                            "[seed=/var/.../seed/nocloud-net]"
+                            ("DataSourceNoCloud "
+                            "[seed=/var/.../seed/nocloud-net]")
                             "[dsmode=net]"
                         ),
                         "init": {
@@ -616,8 +616,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
                         "stage": None,
                         "datasource": (
                             "DataSourceNoCloud "
-                            "[seed=/var/.../seed/nocloud-net]"
-                            "[dsmode=net]"
+                            ("[seed=/var/.../seed/nocloud-net]"
+                            "[dsmode=net]")
                         ),
                         "modules-final": {
                             "errors": [],
